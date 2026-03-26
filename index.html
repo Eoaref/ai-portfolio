@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enas Aref — Human-Centered AI in Higher Education</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #EAF3DE;
+    --green-100: #C0DD97;
+    --green-200: #97C459;
+    --green-400: #639922;
+    --green-600: #3B6D11;
+    --green-800: #27500A;
+    --grey-50: #F1EFE8;
+    --grey-100: #D3D1C7;
+    --grey-200: #B4B2A9;
+    --grey-400: #888780;
+    --grey-600: #5F5E5A;
+    --grey-800: #444441;
+    --grey-900: #2C2C2A;
+    --white: #ffffff;
+    --off-white: #FAFAF7;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --text-muted: #888780;
+    --border: rgba(0,0,0,0.1);
+    --border-light: rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    color: var(--text-primary);
+    background: var(--off-white);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; color: var(--text-secondary);
+    text-decoration: none; padding: 6px 12px; border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-600); background: var(--green-50); }
+  .nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 4px; }
+  .nav-hamburger span { width: 22px; height: 1.5px; background: var(--text-primary); transition: all 0.3s; }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; padding-top: 60px; min-height: 100vh; }
+  .page.active { display: block; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── HOME ── */
+  .hero {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green-400);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 24px; height: 1px; background: var(--green-400);
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+    color: var(--text-primary);
+    max-width: 760px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { font-style: italic; color: var(--green-600); }
+  .hero-body {
+    font-size: 17px; color: var(--text-secondary); line-height: 1.75;
+    max-width: 640px; margin-bottom: 2rem;
+  }
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px; padding: 5px 14px; border-radius: 20px;
+    font-weight: 400;
+  }
+  .tag-green { background: var(--green-50); color: var(--green-800); border: 1px solid var(--green-100); }
+  .tag-grey { background: var(--grey-50); color: var(--grey-600); border: 1px solid var(--grey-100); }
+
+  /* Stats */
+  .stats-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border-light); }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem;
+  }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat-card {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    border-top: 3px solid var(--green-200);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: var(--green-600); line-height: 1; margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* Impact */
+  .impact-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border-light); }
+  .impact-grid { display: flex; flex-direction: column; gap: 12px; }
+  .impact-item {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .impact-item:hover { border-color: var(--green-100); }
+  .impact-marker {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-400); margin-top: 6px; flex-shrink: 0;
+  }
+  .impact-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .impact-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* Seven layers preview */
+  .layers-section { padding: 3.5rem 0; border-bottom: 1px solid var(--border-light); }
+  .layers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .layer-card {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 1rem 1.25rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .layer-card:hover { border-color: var(--green-200); background: var(--green-50); }
+  .layer-num { font-size: 11px; font-weight: 500; color: var(--green-400); margin-bottom: 4px; letter-spacing: 0.05em; }
+  .layer-name { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .layer-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* Connect */
+  .connect-section { padding: 3.5rem 0; }
+  .connect-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.25rem; }
+  .connect-btn {
+    font-size: 13px; padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text-primary);
+    text-decoration: none; transition: all 0.2s;
+    background: var(--white);
+  }
+  .connect-btn:hover { border-color: var(--green-400); color: var(--green-600); background: var(--green-50); }
+
+  /* ── FRAMEWORKS ── */
+  .page-header { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border-light); }
+  .page-header-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green-400); margin-bottom: 1rem;
+  }
+  .page-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px); line-height: 1.2;
+    max-width: 640px; margin-bottom: 1rem;
+  }
+  .page-header-body { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 600px; }
+
+  .framework-section { padding: 3rem 0; border-bottom: 1px solid var(--border-light); }
+  .framework-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; margin-bottom: 0.5rem; color: var(--text-primary);
+  }
+  .framework-subtitle { font-size: 13px; color: var(--green-400); font-weight: 500; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .framework-body { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem; max-width: 680px; }
+
+  .lttr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 1.5rem 0; }
+  .lttr-card {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 1.25rem;
+    border-top: 3px solid var(--green-200);
+  }
+  .lttr-letter { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--green-600); line-height: 1; margin-bottom: 6px; }
+  .lttr-word { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .lttr-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  .stages-list { display: flex; flex-direction: column; gap: 10px; margin: 1.5rem 0; }
+  .stage-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 1rem 1.25rem; background: var(--white);
+    border: 1px solid var(--border-light); border-radius: 10px;
+  }
+  .stage-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green-50); color: var(--green-600);
+    font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .stage-content { flex: 1; }
+  .stage-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .stage-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+  .sez-box {
+    background: var(--green-50); border: 1px solid var(--green-100);
+    border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;
+  }
+  .sez-box p { font-size: 15px; color: var(--green-800); line-height: 1.7; }
+
+  .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 1.5rem 0; }
+  .pillar-card {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 1.25rem;
+  }
+  .pillar-num-badge {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    background: var(--green-50); color: var(--green-600);
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .pillar-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .pillar-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* ── AI AGENTS ── */
+  .agents-grid { display: flex; flex-direction: column; gap: 20px; padding: 3rem 0; }
+  .agent-card {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 16px; padding: 2rem;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;
+    transition: border-color 0.2s;
+  }
+  .agent-card:hover { border-color: var(--green-200); }
+  .agent-left { }
+  .agent-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--green-50); border: 1px solid var(--green-100);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 22px;
+  }
+  .agent-name { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 4px; }
+  .agent-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    background: var(--green-50); color: var(--green-600);
+    padding: 3px 10px; border-radius: 20px;
+    border: 1px solid var(--green-100);
+  }
+  .agent-right { }
+  .agent-purpose { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem; }
+  .agent-meta { display: flex; gap: 1.5rem; }
+  .agent-meta-item { }
+  .agent-meta-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 2px; }
+  .agent-meta-value { font-size: 13px; color: var(--text-primary); }
+
+  /* ── PUBLICATIONS ── */
+  .pub-section { padding: 2.5rem 0; border-bottom: 1px solid var(--border-light); }
+  .pub-section-title {
+    font-size: 13px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--green-400); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pub-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+  .pub-list { display: flex; flex-direction: column; gap: 14px; }
+  .pub-item {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+  }
+  .pub-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; color: var(--text-primary); }
+  .pub-venue { font-size: 13px; color: var(--green-600); margin-bottom: 4px; }
+  .pub-meta { font-size: 12px; color: var(--text-muted); }
+  .pub-badge {
+    display: inline-block; font-size: 11px; padding: 2px 8px;
+    border-radius: 4px; margin-left: 8px; font-weight: 500;
+  }
+  .badge-published { background: var(--green-50); color: var(--green-600); }
+  .badge-review { background: #FEF3C7; color: #92400E; }
+  .badge-accepted { background: #DBEAFE; color: #1E40AF; }
+  .badge-press { background: #F3E8FF; color: #6B21A8; }
+
+  .pres-list { display: flex; flex-direction: column; gap: 10px; }
+  .pres-item {
+    padding: 1rem 1.25rem; background: var(--white);
+    border: 1px solid var(--border-light); border-radius: 10px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .pres-year {
+    font-size: 12px; font-weight: 500; color: var(--green-400);
+    min-width: 36px; margin-top: 2px;
+  }
+  .pres-content { flex: 1; }
+  .pres-title { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .pres-venue { font-size: 12px; color: var(--text-muted); }
+  .pres-type {
+    display: inline-block; font-size: 10px; padding: 2px 6px;
+    border-radius: 4px; background: var(--grey-50);
+    color: var(--grey-600); margin-left: 6px; font-weight: 500;
+    vertical-align: middle;
+  }
+
+  /* ── IMPACT ── */
+  .impact-page-section { padding: 3rem 0; border-bottom: 1px solid var(--border-light); }
+  .impact-highlight {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 16px; padding: 2rem; margin-bottom: 1rem;
+  }
+  .impact-highlight-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--green-400); margin-bottom: 0.75rem;
+  }
+  .impact-highlight-title {
+    font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 0.75rem;
+  }
+  .impact-highlight-body { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+  .resource-list { display: flex; flex-direction: column; gap: 10px; }
+  .resource-item {
+    padding: 1rem 1.25rem; background: var(--white);
+    border: 1px solid var(--border-light); border-radius: 10px;
+  }
+  .resource-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .resource-desc { font-size: 13px; color: var(--text-secondary); }
+  .resource-link { font-size: 12px; color: var(--green-600); text-decoration: none; }
+  .resource-link:hover { text-decoration: underline; }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; padding: 3rem 0; }
+  .about-left { }
+  .about-avatar {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: var(--green-50); border: 2px solid var(--green-100);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 36px;
+    color: var(--green-600); margin-bottom: 1.25rem;
+  }
+  .about-name { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 4px; }
+  .about-role { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem; }
+  .about-contact { display: flex; flex-direction: column; gap: 6px; }
+  .about-contact a { font-size: 13px; color: var(--green-600); text-decoration: none; }
+  .about-contact a:hover { text-decoration: underline; }
+  .about-right { }
+  .about-section-title {
+    font-size: 13px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.75rem; margin-top: 1.5rem;
+  }
+  .about-section-title:first-child { margin-top: 0; }
+  .about-body { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.75rem; }
+  .cred-list { display: flex; flex-direction: column; gap: 8px; }
+  .cred-item {
+    display: flex; gap: 10px; padding: 0.75rem 1rem;
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 8px; align-items: center;
+  }
+  .cred-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-400); flex-shrink: 0; }
+  .cred-text { font-size: 13px; color: var(--text-primary); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border-light);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12px; color: var(--text-muted);
+    background: var(--white);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--off-white); border-bottom: 1px solid var(--border); padding: 1rem; gap: 4px; z-index: 99; }
+    .nav-hamburger { display: flex; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .lttr-grid { grid-template-columns: repeat(2, 1fr); }
+    .agent-card { grid-template-columns: 1fr; gap: 1rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page.active .container > * {
+    animation: fadeUp 0.4s ease forwards;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#" onclick="showPage('home')">Enas Aref</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a href="#" onclick="showPage('frameworks')" id="nav-frameworks">Frameworks</a>
+    <a href="#" onclick="showPage('agents')" id="nav-agents">AI Agents</a>
+    <a href="#" onclick="showPage('publications')" id="nav-publications">Publications</a>
+    <a href="#" onclick="showPage('impact')" id="nav-impact">Impact</a>
+    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ════════════════ HOME ════════════════ -->
+<div class="page active" id="page-home">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">Assistant Teaching Professor · BGSU · Framework Scholar</div>
+      <h1 class="hero-title">
+        Bridging <em>AI innovation</em> and the classroom — one framework at a time.
+      </h1>
+      <p class="hero-body">AI is advancing faster than education can absorb it. I work at that gap — building frameworks, tools, and deployed systems that help educators integrate AI with intention and purpose, and ensuring students engage with it in ways that are ethical, transparent, and genuinely augmenting their learning rather than replacing it.</p>
+      <div class="tag-row">
+        <span class="tag tag-green">Responsible AI</span>
+        <span class="tag tag-green">Framework development</span>
+        <span class="tag tag-green">AI ethics</span>
+        <span class="tag tag-grey">Higher education</span>
+        <span class="tag tag-grey">Human factors</span>
+        <span class="tag tag-grey">Instructional design</span>
+        <span class="tag tag-grey">AI literacy</span>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="section-label">By the numbers</div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Framework layers independently developed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Custom AI agents deployed in live classrooms</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">AI-focused presentations & keynotes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Institutional AI resources published at WMU</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="impact-section">
+      <div class="section-label">Selected impact</div>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-marker"></div>
+          <div>
+            <div class="impact-title">Michigan Small Business Development Center</div>
+            <div class="impact-desc">AI Literacy Framework cited as a core framework in the Michigan SBDC's official guide on Artificial Intelligence for Small Businesses — extending academic research into practitioner adoption at scale across Michigan.</div>
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-marker"></div>
+          <div>
+            <div class="impact-title">WMU AI Graduate Fellow (2024–2025)</div>
+            <div class="impact-desc">Served as the university-wide reference for AI integration at Western Michigan University. Contributed to institutional AI policy, delivered faculty-wide sessions, keynoted IIColab 2025 for K-12 educators on ethical AI use, and supported faculty AI Teaching Innovation Mini-Grant recipients.</div>
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-marker"></div>
+          <div>
+            <div class="impact-title">Published, accepted & under review</div>
+            <div class="impact-desc">Co-authored article in Higher Education Research & Development (2026). Paper accepted at ASEE 2026. Chapters under review for Edward Elgar Publishing and an edited manifesto on generative AI in higher education.</div>
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-marker"></div>
+          <div>
+            <div class="impact-title">International presence</div>
+            <div class="impact-desc">Presented at the 2nd International Symposium on AI in Higher Education (2025), ASEE Annual Conference, MWERA, Magna Faculty Development Professionals Conference, University of Connecticut, Grand Rapids Tech Week, and more.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layers-section">
+      <div class="section-label">The seven-layer framework ecosystem — <a href="#" onclick="showPage('frameworks')" style="color:var(--green-400);text-decoration:none;">explore →</a></div>
+      <div class="layers-grid">
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 1</div>
+          <div class="layer-name">Ethics & policy</div>
+          <div class="layer-desc">LTTR framework for student ethical decision-making</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 2</div>
+          <div class="layer-name">AI literacy</div>
+          <div class="layer-desc">5-stage foundational framework for GenAI literacy</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 3</div>
+          <div class="layer-name">Interaction design</div>
+          <div class="layer-desc">Planned-structured-supervised student-AI interaction</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 4</div>
+          <div class="layer-name">Agent design</div>
+          <div class="layer-desc">PCTII cycle & Educator-in-the-Loop governance</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 5</div>
+          <div class="layer-name">Output quality</div>
+          <div class="layer-desc">14 storytelling characteristics for AI-generated content</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 6</div>
+          <div class="layer-name">Evaluation</div>
+          <div class="layer-desc">210-point Human-AI Collaboration Rubric</div>
+        </div>
+        <div class="layer-card" onclick="showPage('frameworks')">
+          <div class="layer-num">Layer 7</div>
+          <div class="layer-name">Critical thinking</div>
+          <div class="layer-desc">Protecting independent thinking in AI-integrated learning</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connect-section">
+      <div class="section-label">Connect</div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:0.25rem;">Assistant Teaching Professor, College of Technology, Architecture and Applied Engineering</p>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:0.25rem;">Bowling Green State University · earef@bgsu.edu</p>
+      <div class="connect-links">
+        <a class="connect-btn" href="https://www.linkedin.com/in/phdindergo17/" target="_blank">LinkedIn</a>
+        <a class="connect-btn" href="https://www.researchgate.net/profile/Enas-Aref" target="_blank">ResearchGate</a>
+        <a class="connect-btn" href="https://enasaref.substack.com/" target="_blank">Substack</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ FRAMEWORKS ════════════════ -->
+<div class="page" id="page-frameworks">
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header-eyebrow">Original framework development</div>
+      <h1 class="page-header-title">A seven-layer ecosystem for human-centered AI in education</h1>
+      <p class="page-header-body">Built independently over five years of teaching, research, and practice — each layer is classroom-tested, grounded in validated theory, and original in combination. Together they form a complete architecture for ethical, pedagogically sound AI integration.</p>
+    </div>
+
+    <div class="framework-section">
+      <div class="framework-subtitle">Layer 1 — Ethics & policy</div>
+      <div class="framework-title">The LTTR Framework</div>
+      <p class="framework-body">A student-facing ethical decision-making framework embedded in course design. Originally TTR (Traceable, Transparent, Responsible); Literacy was added as the foundational element — students cannot act transparently, trace their process, or exercise responsibility without first being AI-literate.</p>
+      <div class="lttr-grid">
+        <div class="lttr-card">
+          <div class="lttr-letter">L</div>
+          <div class="lttr-word">Literate</div>
+          <div class="lttr-desc">Recognize ethical dimensions before encountering pressure. Know policies, tools, prompting, evaluation, and citation.</div>
+        </div>
+        <div class="lttr-card">
+          <div class="lttr-letter">T</div>
+          <div class="lttr-word">Transparent</div>
+          <div class="lttr-desc">Disclose AI use openly. Make decisions visible rather than implicit.</div>
+        </div>
+        <div class="lttr-card">
+          <div class="lttr-letter">T</div>
+          <div class="lttr-word">Traceable</div>
+          <div class="lttr-desc">Document the learning process — drafts, prompts, reflections, process logs. Slow down decision-making.</div>
+        </div>
+        <div class="lttr-card">
+          <div class="lttr-letter">R</div>
+          <div class="lttr-word">Responsible</div>
+          <div class="lttr-desc">Align AI use with learning purpose. Ask not whether you can use AI, but whether you should.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="framework-section">
+      <div class="framework-subtitle">Layer 1 — Ethics & policy (continued)</div>
+      <div class="framework-title">The Safe Ethical Zone (SEZ)</div>
+      <p class="framework-body">A psychophysics-informed concept describing the dynamic space in which students operate ethically. Students are not consistently ethical or unethical actors — they function within a range shaped by pressure, ambiguity, cognitive load, and environmental stimuli.</p>
+      <div class="sez-box">
+        <p>Generative AI functions as a threshold-destabilizing force — compressing the distance between ethical intention and unethical action. The SEZ is not an excuse for misconduct. It is a diagnostic tool for designing better conditions. Students in the SEZ are often one stimulus away from crossing an ethical boundary.</p>
+      </div>
+    </div>
+
+    <div class="framework-section">
+      <div class="framework-subtitle">Layer 2 — AI literacy</div>
+      <div class="framework-title">Foundational Framework for GenAI Literacy & Deployment</div>
+      <p class="framework-body">A five-stage framework guiding students and educators from first access to full adoption. Adopted beyond academia — cited as a core framework in the Michigan Small Business Development Center's guide on AI for Small Businesses.</p>
+      <div class="stages-list">
+        <div class="stage-item"><div class="stage-num">1</div><div class="stage-content"><div class="stage-name">Access</div><div class="stage-desc">Assess equity, tool availability, and AI literacy baseline.</div></div></div>
+        <div class="stage-item"><div class="stage-num">2</div><div class="stage-content"><div class="stage-name">Learn</div><div class="stage-desc">Guiding principles, ethics, policies, citation models, information security.</div></div></div>
+        <div class="stage-item"><div class="stage-num">3</div><div class="stage-content"><div class="stage-name">Explore & Apply</div><div class="stage-desc">Define goal, create prompts, iterate with AI tool.</div></div></div>
+        <div class="stage-item"><div class="stage-num">4</div><div class="stage-content"><div class="stage-name">Reflect</div><div class="stage-desc">Evaluate output against criteria, revisit ethical guidelines.</div></div></div>
+        <div class="stage-item"><div class="stage-num">5</div><div class="stage-content"><div class="stage-name">Adopt</div><div class="stage-desc">Integrate output, report AI collaboration level.</div></div></div>
+      </div>
+    </div>
+
+    <div class="framework-section">
+      <div class="framework-subtitle">Layers 3–7 — Overview</div>
+      <div class="framework-title">The complete ecosystem</div>
+      <p class="framework-body">Beyond ethics and literacy, the ecosystem addresses every dimension of human-centered AI integration — from how students interact with AI, to how educators build agents, to how outputs are evaluated.</p>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-num-badge">Layer 3</div>
+          <div class="pillar-name">Interaction design</div>
+          <div class="pillar-desc">Student-Driven and AI-Driven interaction models. Ask–Review–Reflect–Follow-up cycle. Planned-Structured-Supervised framework. Published as WMU institutional resources.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num-badge">Layer 4</div>
+          <div class="pillar-name">Agent design</div>
+          <div class="pillar-desc">PCTII cycle (Prepare–Create–Test–Improve–Integrate). Educator-in-the-Loop (EITL) two-layer governance architecture. Practitioner-built, code-free, classroom-tested.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num-badge">Layer 5</div>
+          <div class="pillar-name">Output quality</div>
+          <div class="pillar-desc">14 storytelling characteristics (10 primary, 4 secondary) for AI-generated instructional content. Structured intake interface constraining AI within pedagogical boundaries.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num-badge">Layer 6</div>
+          <div class="pillar-name">Evaluation</div>
+          <div class="pillar-desc">Human-AI Collaboration Rubric — 210-point instrument measuring quality of human-AI interaction (110 human tasks, 100 AI tasks).</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-num-badge">Layer 7</div>
+          <div class="pillar-name">Critical thinking</div>
+          <div class="pillar-desc">Strategies for preventing cognitive dependency and protecting independent thinking in AI-integrated learning environments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ AI AGENTS ════════════════ -->
+<div class="page" id="page-agents">
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header-eyebrow">Practitioner evidence</div>
+      <h1 class="page-header-title">Deployed AI agents — built for real classrooms</h1>
+      <p class="page-header-body">Each agent is practitioner-built, classroom-tested, and grounded in published frameworks. These are not prototypes — they are working tools used by real students and educators.</p>
+    </div>
+
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-left">
+          <div class="agent-icon">⚙</div>
+          <div class="agent-name">EM6000 GPT</div>
+          <br>
+          <span class="agent-tag">Simulation agent</span>
+        </div>
+        <div class="agent-right">
+          <p class="agent-purpose">A management and organizational behavior simulation agent deployed in EM6000 at Western Michigan University. Guides students through complex team dynamics, conflict resolution scenarios, and management decision-making in a simulated environment — building skills that transfer to real workplace contexts.</p>
+          <div class="agent-meta">
+            <div class="agent-meta-item"><div class="agent-meta-label">Course</div><div class="agent-meta-value">EM6000 — Mgmt & Org Behavior</div></div>
+            <div class="agent-meta-item"><div class="agent-meta-label">Framework</div><div class="agent-meta-value">PCTII cycle, EITL governance</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-left">
+          <div class="agent-icon">🗂</div>
+          <div class="agent-name">Project Pal GPT</div>
+          <br>
+          <span class="agent-tag">Learning support agent</span>
+        </div>
+        <div class="agent-right">
+          <p class="agent-purpose">A project-based learning support agent designed to scaffold student teamwork, conflict navigation, and project management tasks. Supports the LTTR framework by guiding students toward transparent, traceable AI use while keeping the human learning process at the center.</p>
+          <div class="agent-meta">
+            <div class="agent-meta-item"><div class="agent-meta-label">Course</div><div class="agent-meta-value">Project-based learning courses</div></div>
+            <div class="agent-meta-item"><div class="agent-meta-label">Framework</div><div class="agent-meta-value">LTTR, PCTII cycle</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-left">
+          <div class="agent-icon">📐</div>
+          <div class="agent-name">Fact-O-Fictionist GPT</div>
+          <br>
+          <span class="agent-tag">Content generation agent</span>
+        </div>
+        <div class="agent-right">
+          <p class="agent-purpose">A story-driven engineering problem generator that contextualizes technical content through narrative. Uses a structured A–L intake checklist to constrain AI output within pedagogical boundaries — ensuring generated problems are educationally sound, contextually rich, and aligned with learning objectives. Underpins the accepted ASEE 2026 paper on story-driven AI-augmented instruction.</p>
+          <div class="agent-meta">
+            <div class="agent-meta-item"><div class="agent-meta-label">Application</div><div class="agent-meta-value">Engineering education</div></div>
+            <div class="agent-meta-item"><div class="agent-meta-label">Framework</div><div class="agent-meta-value">14 storytelling characteristics, Layer 5</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-left">
+          <div class="agent-icon">🌱</div>
+          <div class="agent-name">Pedagogy of Care GPT</div>
+          <br>
+          <span class="agent-tag">Educator support agent</span>
+        </div>
+        <div class="agent-right">
+          <p class="agent-purpose">A trauma-informed pedagogy support agent developed to accompany the presentation "Pedagogy of Care: Teaching Through Grief, Trauma, and Vulnerability" at the Magna Faculty Development Professionals Conference (August 2025). Helps faculty developers and educators apply trauma-informed pedagogical principles in practice — bridging scholarship and classroom action with compassion at the center.</p>
+          <div class="agent-meta">
+            <div class="agent-meta-item"><div class="agent-meta-label">Venue</div><div class="agent-meta-value">Magna Faculty Dev. Conference 2025</div></div>
+            <div class="agent-meta-item"><div class="agent-meta-label">Framework</div><div class="agent-meta-value">Trauma-informed design, care ethics</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ PUBLICATIONS ════════════════ -->
+<div class="page" id="page-publications">
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header-eyebrow">Scholarship & dissemination</div>
+      <h1 class="page-header-title">Publications & presentations</h1>
+      <p class="page-header-body">A record of peer-reviewed scholarship, conference presentations, and institutional publications — all focused on human-centered, ethical AI integration in higher education.</p>
+    </div>
+
+    <div class="pub-section">
+      <div class="pub-section-title">Published</div>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-title">Teaching Through Grief, Designing for Care: Toward Trauma-Informed and Student-Centered Pedagogy <span class="pub-badge badge-published">Published</span></div>
+          <div class="pub-venue">Higher Education Research & Development, 45(2), 366–373</div>
+          <div class="pub-meta">Aref, E. & Paul, D. (2026) · DOI: 10.1080/07294360.2026.2617298</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Team Dynamics and Conflict Resolution: Integrating Gen AI in Project-Based Learning to Support Student Performance <span class="pub-badge badge-published">Published</span></div>
+          <div class="pub-venue">2024 ASEE Annual Conference & Exposition, Portland, Oregon</div>
+          <div class="pub-meta">Aref, E. (2024) · DOI: 10.18260/1-2--48074</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Empowering Engineering Educators: Build and Implement a Custom AI Assistant for Student Learning and Engagement <span class="pub-badge badge-published">Published</span></div>
+          <div class="pub-venue">2025 ASEE North Central Section Conference, Marshall University, WV</div>
+          <div class="pub-meta">Aref, E. (2025) · DOI: 10.13140/RG.2.2.33418.99522</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-section">
+      <div class="pub-section-title">Accepted & under review</div>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-title">Designing Story-Driven and AI-Augmented Instruction: A Pedagogical Approach to Contextualizing Engineering Education <span class="pub-badge badge-accepted">Accepted</span></div>
+          <div class="pub-venue">ASEE 2026 Annual Conference</div>
+          <div class="pub-meta">Aref, E., Aljabr, B., Aljasem, M., Kluse, C. (2026) · Work-in-progress paper</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Ethics by Design: From Compliance to Conscience <span class="pub-badge badge-review">Under review</span></div>
+          <div class="pub-venue">Manifesto for Generative AI in Higher Education (edited collection)</div>
+          <div class="pub-meta">Aref, E. (2026) · Chapter submitted March 2026</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">AI Literacy in Higher Education: From Knowledge to Practice <span class="pub-badge badge-review">Under review</span></div>
+          <div class="pub-venue">New AI Literacy in Education: People, Contexts, and AI (Edward Elgar Publishing)</div>
+          <div class="pub-meta">Aref, E. (2026) · Book chapter</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">A Usability-Pedagogy Integration Framework for Designing Custom AI Agents to Support Student Learning <span class="pub-badge badge-review">Under review</span></div>
+          <div class="pub-venue">ASPIRE HFES 2026 Conference</div>
+          <div class="pub-meta">Aref, E. (2026) · Extended abstract submitted February 2026</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">A Structured Framework for Ethical Integration of Artificial Intelligence in Engineering Education <span class="pub-badge badge-review">Under review</span></div>
+          <div class="pub-venue">ASEE 2026 Annual Conference</div>
+          <div class="pub-meta">Aref, E. (2026)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-section">
+      <div class="pub-section-title">Institutional publications</div>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-title">AI and Critical Thinking in Education</div>
+          <div class="pub-venue">WMU Teaching & Learning Resources</div>
+          <div class="pub-meta"><a href="https://wmich.edu/x/teaching-learning/teaching-resources/ai-critical-thinking" style="color:var(--green-400);" target="_blank">wmich.edu — view resource →</a></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Planned, Structured, Supervised: Student-AI Interaction</div>
+          <div class="pub-venue">WMU Teaching & Learning Resources</div>
+          <div class="pub-meta"><a href="https://wmich.edu/x/teaching-learning/teaching-resources/student-ai-interaction" style="color:var(--green-400);" target="_blank">wmich.edu — view resource →</a></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Implementation Guidance for AI-Restricted Courses</div>
+          <div class="pub-venue">WMU Teaching & Learning Resources</div>
+          <div class="pub-meta"><a href="https://wmich.edu/x/teaching-learning/teaching-resources/guidance-ai-restricted-courses" style="color:var(--green-400);" target="_blank">wmich.edu — view resource →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-section">
+      <div class="pub-section-title">Selected AI-focused presentations</div>
+      <div class="pres-list">
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">AI Literacy in Higher Education: From Knowledge to Practice <span class="pres-type">Presenter</span></div><div class="pres-venue">2nd International Symposium on Artificial Intelligence in Higher Education</div></div></div>
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">Pedagogy of Care: Teaching Through Grief, Trauma, and Vulnerability <span class="pres-type">Presenter</span></div><div class="pres-venue">Magna Faculty Development Professionals Conference (virtual)</div></div></div>
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">Supporting Students in the Ethical Use of AI <span class="pres-type">Keynote</span></div><div class="pres-venue">Instructional Innovation Colab 2025, WMUx — K-12 educators</div></div></div>
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">AI in the Classroom: Promoting Learning via Intelligent Agents <span class="pres-type">Guest speaker</span></div><div class="pres-venue">University of Connecticut, Center for Excellence in Teaching and Learning</div></div></div>
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">Teaching with AI: Designing Custom GPTs to Foster Critical Thinking <span class="pres-type">Guest speaker</span></div><div class="pres-venue">Bowling Green State University, College of Engineering and Innovation</div></div></div>
+        <div class="pres-item"><div class="pres-year">2025</div><div class="pres-content"><div class="pres-title">Empowering Educators: Build and Implement a Custom AI Assistant <span class="pres-type">Workshop</span></div><div class="pres-venue">ASEE North Central Section Conference, Marshall University, WV</div></div></div>
+        <div class="pres-item"><div class="pres-year">2024</div><div class="pres-content"><div class="pres-title">AI in Action: From Classroom to Real-World Applications <span class="pres-type">Panelist</span></div><div class="pres-venue">Grand Rapids Tech Week 2024</div></div></div>
+        <div class="pres-item"><div class="pres-year">2024</div><div class="pres-content"><div class="pres-title">Team Dynamics and Conflict Resolution: Integrating Gen AI in Project-Based Learning <span class="pres-type">Paper</span></div><div class="pres-venue">ASEE Annual Conference, Portland, Oregon</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ IMPACT ════════════════ -->
+<div class="page" id="page-impact">
+  <div class="container">
+    <div class="page-header">
+      <div class="page-header-eyebrow">Real-world reach</div>
+      <h1 class="page-header-title">Impact beyond the classroom</h1>
+      <p class="page-header-body">Research that stays inside the academy is incomplete. These are the places my frameworks, tools, and teaching have traveled — from Michigan small businesses to K-12 educators to university policy.</p>
+    </div>
+
+    <div class="impact-page-section">
+      <div class="section-label">Practitioner adoption</div>
+      <div class="impact-highlight">
+        <div class="impact-highlight-label">Michigan SBDC</div>
+        <div class="impact-highlight-title">AI Literacy Framework adopted for small business education</div>
+        <div class="impact-highlight-body">The Michigan Small Business Development Center — part of a national network supporting small business growth — cited my AI Literacy Framework as a core framework in their official guide on Artificial Intelligence for Small Businesses. This represents a direct bridge from academic framework development to practitioner adoption at scale: entrepreneurs and small business owners across Michigan are navigating AI using a framework developed and validated in higher education.</div>
+      </div>
+    </div>
+
+    <div class="impact-page-section">
+      <div class="section-label">Institutional leadership</div>
+      <div class="impact-highlight">
+        <div class="impact-highlight-label">WMU AI Graduate Fellow, 2024–2025</div>
+        <div class="impact-highlight-title">University-wide AI integration reference</div>
+        <div class="impact-highlight-body">As AI Graduate Fellow at WMUx, I served as the institutional reference point for AI integration at Western Michigan University. This included contributing to the development of university-wide AI policy by synthesizing current policies and research and providing structured feedback; delivering faculty development sessions across the university; providing one-on-one consultation to faculty implementing AI innovations; and facilitating group workshops supporting recipients of WMU's AI Teaching Innovation Mini-Grants — helping faculty design and pilot AI-integrated course innovations across disciplines.</div>
+      </div>
+    </div>
+
+    <div class="impact-page-section">
+      <div class="section-label">K-12 & community reach</div>
+      <div class="impact-highlight">
+        <div class="impact-highlight-label">IIColab 2025 Keynote</div>
+        <div class="impact-highlight-title">Ethical AI use for K-12 educators</div>
+        <div class="impact-highlight-body">Delivered the keynote address at the Instructional Innovation Colab (IIColab) 2025, hosted by WMUx and Kalamazoo Public Schools. The audience was K-12 educators navigating AI adoption in their schools — a population that rarely receives research-grounded guidance on responsible AI. The session focused on ethical AI use, practical integration strategies, and how to support students in developing healthy relationships with AI tools.</div>
+      </div>
+    </div>
+
+    <div class="impact-page-section">
+      <div class="section-label">WMU institutional resources</div>
+      <div class="resource-list">
+        <div class="resource-item">
+          <div class="resource-title">AI and Critical Thinking in Education</div>
+          <div class="resource-desc">Strategies for protecting independent thinking and preventing cognitive dependency in AI-integrated learning.</div>
+          <a class="resource-link" href="https://wmich.edu/x/teaching-learning/teaching-resources/ai-critical-thinking" target="_blank">View at wmich.edu →</a>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">Planned, Structured, Supervised: Student-AI Interaction</div>
+          <div class="resource-desc">A framework for designing intentional student-AI interaction in courses — moving beyond unregulated use toward purposeful integration.</div>
+          <a class="resource-link" href="https://wmich.edu/x/teaching-learning/teaching-resources/student-ai-interaction" target="_blank">View at wmich.edu →</a>
+        </div>
+        <div class="resource-item">
+          <div class="resource-title">Implementation Guidance for AI-Restricted Courses</div>
+          <div class="resource-desc">Practical guidance for faculty designing courses where AI use is limited — supporting clear expectations and ethical course design.</div>
+          <a class="resource-link" href="https://wmich.edu/x/teaching-learning/teaching-resources/guidance-ai-restricted-courses" target="_blank">View at wmich.edu →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<div class="page" id="page-about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="about-avatar">EA</div>
+        <div class="about-name">Enas Aref</div>
+        <div class="about-role">Assistant Teaching Professor<br>College of Technology, Architecture and Applied Engineering<br>Bowling Green State University</div>
+        <div class="about-contact">
+          <a href="mailto:earef@bgsu.edu">earef@bgsu.edu</a>
+          <a href="https://www.linkedin.com/in/phdindergo17/" target="_blank">LinkedIn</a>
+          <a href="https://www.researchgate.net/profile/Enas-Aref" target="_blank">ResearchGate</a>
+          <a href="https://enasaref.substack.com/" target="_blank">Substack</a>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-section-title">Scholarly identity</div>
+        <p class="about-body">I am a human-centered framework scholar working at the intersection of human factors, educational psychology, instructional design, and AI ethics. My core through-line: I build protective design systems for people inside institutions not designed with their full humanity in mind.</p>
+        <p class="about-body">I do not just describe problems — I build frameworks, tools, and deployed artifacts that solve them. Over five years of independent work, without a research mentor, I have developed a seven-layer framework ecosystem for ethical AI integration in higher education — while completing a PhD and beginning a faculty position.</p>
+
+        <div class="about-section-title">Research streams</div>
+        <p class="about-body">Stream 1 — AI-Integrated Education: Building human-centered frameworks for ethical, pedagogically sound AI integration in higher education. Seven layers of original framework development, three deployed AI agents, and a publication record spanning peer-reviewed journals, conference proceedings, and institutional resources.</p>
+        <p class="about-body">Stream 2 — PhD Research in Ergonomics (WMU, ABD): Using machine learning and computer vision to classify hand movements in repetitive motion tasks to capture how fatigue develops. Interdisciplinary, multi-layered, and methodologically sophisticated.</p>
+
+        <div class="about-section-title">Credentials & roles</div>
+        <div class="cred-list">
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">ABD, Interdisciplinary PhD in Engineering — Ergonomics, ML, Computer Vision · Western Michigan University</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">MS Project Management (MPM) · Keller Graduate School of Management</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">Adult Education Professional (AEP)</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">Associate Ergonomics Professional (AEP) · BCPE</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">AI Graduate Fellow (2024–2025) · WMUx, Western Michigan University</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">All University Graduate Teaching Effectiveness Award · WMU, 2024–2025</div></div>
+          <div class="cred-item"><div class="cred-dot"></div><div class="cred-text">BS Mechanical Engineering · Ain Shams University, Cairo, Egypt</div></div>
+        </div>
+
+        <div class="about-section-title">Teaching at BGSU</div>
+        <p class="about-body">Courses include Engineering Management (IEE 3010 / TECH 4400), Supervisory Practices in Technological Settings (TECH 4000), Seminar in Management and Technology (TECH 4500), Information Policy Analysis (TECH 4220), and Technological Forecasting (TECH 4210). Teaching philosophy: student-centered, trauma-informed, AI-integrated with ethical boundaries.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Enas Aref · Human-Centered AI: Frameworks for Responsible Integration in Higher Education</p>
+  <p style="margin-top:6px;"><a href="https://eoaref.github.io/ai-portfolio" style="color:var(--green-400);text-decoration:none;">eoaref.github.io/ai-portfolio</a></p>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+    // close mobile menu
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close menu on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('nav')) {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
