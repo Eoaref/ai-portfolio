@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents — Enas Aref</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">Enas Aref</a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="frameworks.html">Frameworks</a>
+    <a href="agents.html" class="active">AI Agents</a>
+    <a href="publications.html">Publications & Presentations</a>
+    <a href="impact.html">Impact</a>
+    <a href="about.html">About</a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="container">
+
+    <div class="page-header">
+      <div class="eyebrow">Practitioner evidence</div>
+      <h1 class="page-title">Deployed AI agents — built for real classrooms</h1>
+      <p class="page-body">Each agent is practitioner-built using the PCTII cycle, classroom-tested, and grounded in published frameworks. These are not prototypes — they are working tools used by real students and educators, governed by the Educator-in-the-Loop (EITL) architecture.</p>
+    </div>
+
+    <div class="section" style="display:flex; flex-direction:column; gap:24px;">
+
+      <!-- AGENT 1 -->
+      <div class="card" style="display:grid; grid-template-columns:1fr 2fr; gap:2rem;">
+        <div>
+          <div style="width:52px; height:52px; border-radius:14px; background:var(--green-50); border:1px solid var(--green-100); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:1rem;">⚙</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:8px;">Management and Organizational Behavior Simulation</div>
+          <span style="display:inline-block; font-size:11px; font-weight:500; background:var(--green-50); color:var(--green-600); padding:3px 10px; border-radius:20px; border:1px solid var(--green-100);">Simulation agent</span>
+          <div style="margin-top:1rem;">
+            <a href="https://chatgpt.com/g/g-j5DgkpWWT-management-and-organizational-behavior-simulation" target="_blank" style="font-size:13px; color:var(--green-600); text-decoration:none; border:1px solid var(--green-100); padding:6px 14px; border-radius:8px; background:var(--green-50); display:inline-block;">Open GPT →</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">Simulated practice in fictional management and leadership case studies. Deployed in EM6000 at Western Michigan University, this agent guides students through complex team dynamics, conflict resolution scenarios, and management decision-making in a simulated environment — building skills that transfer directly to real workplace contexts.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Course</div><div style="font-size:13px;">EM6000 — Mgmt & Org Behavior, WMU</div></div>
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Framework</div><div style="font-size:13px;">PCTII cycle, EITL governance</div></div>
+          </div>
+          <img src="images/em6000_screenshot.png" alt="EM6000 GPT Screenshot" style="max-width:100%; border-radius:8px; border:1px solid var(--border-light); margin-top:1rem;" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- AGENT 2 -->
+      <div class="card" style="display:grid; grid-template-columns:1fr 2fr; gap:2rem;">
+        <div>
+          <div style="width:52px; height:52px; border-radius:14px; background:var(--green-50); border:1px solid var(--green-100); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:1rem;">🗂</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:8px;">The Project Pal</div>
+          <span style="display:inline-block; font-size:11px; font-weight:500; background:var(--green-50); color:var(--green-600); padding:3px 10px; border-radius:20px; border:1px solid var(--green-100);">Learning support agent</span>
+          <div style="margin-top:1rem;">
+            <a href="https://chatgpt.com/g/g-67EtwaJDU-the-project-pal" target="_blank" style="font-size:13px; color:var(--green-600); text-decoration:none; border:1px solid var(--green-100); padding:6px 14px; border-radius:8px; background:var(--green-50); display:inline-block;">Open GPT →</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">Guiding students in reflecting and brainstorming for projects. Trained on the Team Dynamics and Conflict Resolution (TDCR) module, Project Pal assists students with project planning, task assignment, conflict resolution, and team dynamics — while scaffolding their thinking rather than replacing it. Supports the LTTR framework by guiding transparent, traceable AI use.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Application</div><div style="font-size:13px;">Project-based learning courses</div></div>
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Framework</div><div style="font-size:13px;">LTTR, PCTII, TDCR module</div></div>
+          </div>
+          <img src="images/project_pal_screenshot.png" alt="Project Pal GPT Screenshot" style="max-width:100%; border-radius:8px; border:1px solid var(--border-light); margin-top:1rem;" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- AGENT 3 -->
+      <div class="card" style="display:grid; grid-template-columns:1fr 2fr; gap:2rem;">
+        <div>
+          <div style="width:52px; height:52px; border-radius:14px; background:var(--green-50); border:1px solid var(--green-100); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:1rem;">📐</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:8px;">The Fact-O-Fictionist Story Problems</div>
+          <span style="display:inline-block; font-size:11px; font-weight:500; background:var(--green-50); color:var(--green-600); padding:3px 10px; border-radius:20px; border:1px solid var(--green-100);">Content generation agent</span>
+          <div style="margin-top:1rem;">
+            <a href="https://chatgpt.com/g/g-694c7b5a2ed08191add0d50d49f71d0c-the-fact-o-fictionist-story-problems" target="_blank" style="font-size:13px; color:var(--green-600); text-decoration:none; border:1px solid var(--green-100); padding:6px 14px; border-radius:8px; background:var(--green-50); display:inline-block;">Open GPT →</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">Creates personalized, scaffolded story problems for undergraduate engineering curriculum. Uses a structured A–L intake checklist to constrain AI output within pedagogical boundaries — ensuring generated problems are educationally sound, contextually rich, and aligned with learning objectives. Embeds the EITL two-layer governance architecture and PCTII cycle. Underpins the accepted ASEE 2026 paper on story-driven AI-augmented instruction.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Application</div><div style="font-size:13px;">Engineering education</div></div>
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Framework</div><div style="font-size:13px;">14 storytelling characteristics, EITL, PCTII</div></div>
+          </div>
+          <img src="images/fact_o_fictionist_screenshot.png" alt="Fact-O-Fictionist GPT Screenshot" style="max-width:100%; border-radius:8px; border:1px solid var(--border-light); margin-top:1rem;" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- AGENT 4 -->
+      <div class="card" style="display:grid; grid-template-columns:1fr 2fr; gap:2rem;">
+        <div>
+          <div style="width:52px; height:52px; border-radius:14px; background:var(--green-50); border:1px solid var(--green-100); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:1rem;">🌱</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:20px; margin-bottom:8px;">Trauma-Informed & Care Pedagogy Assistant</div>
+          <span style="display:inline-block; font-size:11px; font-weight:500; background:var(--green-50); color:var(--green-600); padding:3px 10px; border-radius:20px; border:1px solid var(--green-100);">Educator support agent</span>
+          <div style="margin-top:1rem;">
+            <a href="https://chatgpt.com/g/g-68af246c68fc8191bf1103b8f1c0fafb-trauma-informed-care-pedagogy-assistant" target="_blank" style="font-size:13px; color:var(--green-600); text-decoration:none; border:1px solid var(--green-100); padding:6px 14px; border-radius:8px; background:var(--green-50); display:inline-block;">Open GPT →</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:15px; color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">Supports faculty in integrating trauma-informed pedagogy and pedagogy of care into their teaching practice. Developed to accompany the presentation <em>Pedagogy of Care: Teaching Through Grief, Trauma, and Vulnerability</em> at the Magna Faculty Development Professionals Conference (August 2025). Built using the PCTII cycle, this agent reflects a commitment to designing AI tools that serve the full humanity of educators — not just their instructional efficiency.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Venue</div><div style="font-size:13px;">Magna Faculty Dev. Conference, Aug 2025</div></div>
+            <div><div style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:2px;">Framework</div><div style="font-size:13px;">Trauma-informed design, care ethics, PCTII</div></div>
+          </div>
+          <img src="images/pedagogy_care_screenshot.png" alt="Trauma-Informed GPT Screenshot" style="max-width:100%; border-radius:8px; border:1px solid var(--border-light); margin-top:1rem;" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <!-- AI PROMPT LIBRARY -->
+      <div class="card" style="border:2px solid var(--green-100); background:var(--green-50);">
+        <div style="font-size:11px; font-weight:500; color:var(--green-600); text-transform:uppercase; letter-spacing:.08em; margin-bottom:.5rem;">Layer 7 Artifact — Critical Thinking Protection</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:.75rem; color:var(--green-800);">AI Prompt Library</div>
+        <p style="font-size:15px; color:var(--green-800); line-height:1.7; margin-bottom:1rem;">A structured, educator-designed prompt library developed for an online people-management course. Offers students a principled middle ground between unrestricted AI use and complete restriction — six curated prompts that scaffold ethical thinking rather than replacing it, and support learning rather than undermining it. Grounded in a proposed typology for generative AI in teaching and learning.</p>
+        <p style="font-size:13px; color:var(--green-600); font-style:italic;">A design case is under review for publication in the International Journal of Designs for Learning (IJDL).</p>
+        <img src="images/prompt_library.png" alt="AI Prompt Library" style="max-width:100%; border-radius:8px; border:1px solid var(--green-100); margin-top:1rem;" onerror="this.style.display='none'">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Enas Aref · Human-Centered AI: Frameworks for Responsible Integration in Higher Education</p>
+  <p style="margin-top:6px;"><a href="https://eoaref.github.io/ai-portfolio">eoaref.github.io/ai-portfolio</a></p>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+document.addEventListener('click', function(e) { if (!e.target.closest('nav')) document.getElementById('navLinks').classList.remove('open'); });
+</script>
+</body>
+</html>
